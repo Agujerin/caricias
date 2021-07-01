@@ -1,111 +1,198 @@
-//MOSTRAR LISTADO DE PERSONAJES
-document.getElementById ("list-btn").addEventListener("click",()=>{
-    document.getElementById ("aside").classList.add("showList")
-})
+"use strict"
 
-document.getElementById ("close-btn").addEventListener("click",()=>{
-    document.getElementById ("aside").classList.remove("showList")
-})
+import { itemFound,itemFoundSign } from "./helpers.js"
 
-//FUNCIONES
-const itemFound = ((a)=>{
-    let child= document.getElementById ("asideList").childNodes[a]
-    child.classList.add ("itemFound")
-    console.log(counter--)
-})
+//NAVIGATION MENU
+let href = location.href
+const home = document.getElementById('home')
+const levelOne = document.getElementById('levelOne')
+const levelTwo = document.getElementById('levelTwo')
 
-const itemFoundSign = ((a)=>{
-    let child = document.getElementById ("asideList").childNodes[a].textContent
-    let sign = document.createElement ("DIV")
-    sign.classList.add ("itemFoundSignStyles")
-    sign.innerText = `¡Encontraste a ${child}!`
-    let container = document.getElementById ("levelContainer").appendChild(sign)
-        setTimeout (()=>{
-            container.removeChild(container.firstChild)
-            sign.classList.remove ("itemFoundSignStyles")
-        },1200)
-})
-
-document.getElementById("reloadBtn").addEventListener("click",()=>{ location.reload()})
+if (href.includes("level1")) levelOne.classList.add("nav-item-selected")
+else if (href.includes("level2")) levelTwo.classList.add("nav-item-selected")
+else home.classList.add("nav-item-selected")
 
 
-//BÚSQUEDA NIVEL
-let counter = 18
+//SHOW CHARACTERS LIST 
+if (href.includes("level")){
+    
+    document.getElementById ("list-btn").addEventListener("click",()=>{
+        document.getElementById ("aside").classList.toggle("showList")
+    })
+    document.getElementById ("close-btn").addEventListener("click",()=>{
+        document.getElementById ("aside").classList.remove("showList")
+    })
+    
+    document.getElementById("reloadBtn").addEventListener("click",()=> location.reload())
+}
 
-document.getElementById ("img1").addEventListener("click",(e)=>{
-    console.log (e.offsetX, e.offsetY)
-    if (e.offsetX > 425.5 && e.offsetX < 453.5 && e.offsetY > 538.1875 && e.offsetY < 600.1875) {
-        itemFound(1)
-        itemFoundSign(1)
-    }
-    else if (e.offsetX > 770.5 && e.offsetX < 818.5 && e.offsetY > 128.1875 && e.offsetY < 154.1875) {
-        itemFound(3)
-        itemFoundSign(3)
-    }
-    else if (e.offsetX > 319.3 && e.offsetX < 343.3 && e.offsetY > 381.16 && e.offsetY < 405.16) {
-        itemFound(5)
-        itemFoundSign(5)
-    }
-    else if (e.offsetX > 72.6 && e.offsetX < 103.6 && e.offsetY > 303.83 && e.offsetY < 354.50) {
-        itemFound(7)
-        itemFoundSign(7)
-    }
-    else if (e.offsetX > 844.6 && e.offsetX < 863.3 && e.offsetY > 254.5 && e.offsetY < 310.50) {
-        itemFound(9)
-        itemFoundSign(9)
-    }
-    else if (e.offsetX > 304.6 && e.offsetX < 324.6 && e.offsetY > 505.1 && e.offsetY < 549.16) {
-        itemFound(11)
-        itemFoundSign(11)
-    }
-    else if (e.offsetX > 499.3 && e.offsetX < 526.3 && e.offsetY > 197.16 && e.offsetY < 254.5) {
-        itemFound(13)
-        itemFoundSign(13)
-    }
-    else if (e.offsetX > 602 && e.offsetX < 623.3 && e.offsetY > 149.16 && e.offsetY < 190.5) {
-        itemFound(15)
-        itemFoundSign(15)
-    }
-    else if (e.offsetX > 968.6 && e.offsetX < 987.3 && e.offsetY > 458.5 && e.offsetY < 479.8) {
-        itemFound(17)
-        itemFoundSign(17)
-    }
-    else if (e.offsetX > 114 && e.offsetX < 124.6 && e.offsetY > 513.16 && e.offsetY < 525.16) {
-        itemFound(19)
-        itemFoundSign(19)
-    }
-    else if (e.offsetX > 959.3 && e.offsetX < 983.3 && e.offsetY > 77.16 && e.offsetY < 101.16) {
-        itemFound(21)
-        itemFoundSign(21)
-    }
-    else if (e.offsetX > 255.3 && e.offsetX < 310 && e.offsetY > 413.16 && e.offsetY < 474.5) {
-        itemFound(23)
-        itemFoundSign(23)
-    }
-    else if (e.offsetX > 767.3 && e.offsetX < 794 && e.offsetY > 317.16 && e.offsetY < 345.16) {
-        itemFound(25)
-        itemFoundSign(25)
-    }
-    else if (e.offsetX > 46 && e.offsetX < 67.3 && e.offsetY > 114.5 && e.offsetY < 147.8) {
-        itemFound(27)
-        itemFoundSign(27)
-    }
-    else if (e.offsetX > 892.6 && e.offsetX < 906 && e.offsetY > 174.5 && e.offsetY < 187.8) {
-        itemFound(29)
-        itemFoundSign(29)
-    }
-    else if (e.offsetX > 22 && e.offsetX < 76.6 && e.offsetY > 614.5 && e.offsetY < 657.16) {
-        itemFound(31)
-        itemFoundSign(31)
-    }
-    else if (e.offsetX > 603.3 && e.offsetX < 634 && e.offsetY > 203.8 && e.offsetY < 229.16) {
-        itemFound(33)
-        itemFoundSign(33)
-    }
-    else if (e.offsetX > 128.6 && e.offsetX < 152.6 && e.offsetY > 149.16 && e.offsetY < 173.16) {
-        itemFound(35)
-        itemFoundSign(35)
+//LEVEL 1
+let count = 18
+
+const counter =(index)=>{
+    count --
+    itemFound(index)
+    itemFoundSign(index)
+}
+
+if (href.includes("level1")){
+
+let ElisaMaradoniana = false
+let RebordMenemista = false
+let CristianRadical = false
+let EspirituAlfonsin = false
+let tatuajeMaradona = false
+let OrnitorrincoCosmico = false
+let TatiAlmeyda = false
+let Niceforo = false
+let Pepetito = false
+let CacaLanata = false
+let CasaCristian = false
+let CampingForster = false
+let TuTubo = false
+let Fierrito = false
+let Tecito = false
+let CaballoElisa = false
+let ChorroRebord = false
+let GallinaNavarro = false
+
+document.getElementById("img1").addEventListener("click",(e)=>{
+    let x = e.offsetX
+    let y = e.offsetY
+    
+    if (x > 425.5 && x < 453.5 && y > 538.1875 && y < 600.1875 &&  !ElisaMaradoniana){
+        ElisaMaradoniana = true
+        counter(1)
+    }else if (x > 770.5 && x < 818.5 && y > 128.1875 && y < 154.1875 && !RebordMenemista){
+        RebordMenemista = true
+        counter(3)
+    }else if (x > 319.3 && x < 343.3 && y > 381.16 && y < 405.16 && !CristianRadical){
+        CristianRadical = true
+        counter(5)
+    }else if (x > 72.6 && x < 103.6 && y > 303.83 && y < 354.50 && !EspirituAlfonsin){
+        EspirituAlfonsin = true
+        counter(7)
+    }else if (x > 844.6 && x < 863.3 && y > 254.5 && y < 310.50 && !tatuajeMaradona){
+        tatuajeMaradona = true
+        counter(9)
+    }else if (x > 304.6 && x < 324.6 && y > 505.1 && y < 549.16 && !OrnitorrincoCosmico){
+        OrnitorrincoCosmico = true
+        counter(11)
+    }else if (x > 499.3 && x < 526.3 && y > 197.16 && y < 254.5 && !TatiAlmeyda){
+        TatiAlmeyda = true
+        counter(13)
+    }else if (x > 602 && x < 623.3 && y > 149.16 && y < 190.5 && !Niceforo){
+        Niceforo = true
+        counter(15)
+    }else if (x > 968.6 && x < 987.3 && y > 458.5 && y < 479.8 && !Pepetito){
+        Pepetito = true
+        counter(17)
+    }else if (x > 114 && x < 124.6 && y > 513.16 && y < 525.16 && !CacaLanata){
+        CacaLanata = true
+        counter(19)
+    }else if (x > 959.3 && x < 983.3 && y > 77.16 && y < 101.16 && !CasaCristian){
+        CasaCristian = true
+        counter(21)
+    }else if (x > 255.3 && x < 310 && y > 413.16 && y < 474.5 && !CampingForster){
+        CampingForster = true
+        counter(23)
+    }else if (x > 767.3 && x < 794 && y > 317.16 && y < 345.16 && !TuTubo){
+        TuTubo = true
+        counter(25)
+    }else if (x > 46 && x < 67.3 && y > 114.5 && y < 147.8 && !Fierrito){
+        Fierrito = true
+        counter(27)
+    }else if (x > 892.6 && x < 906 && y > 174.5 && y < 187.8 && !Tecito){
+        Tecito = true
+        counter(29)
+    }else if (x > 22 && x < 76.6 && y > 614.5 && y < 657.16 && !CaballoElisa){
+        CaballoElisa = true
+        counter(31)
+    }else if (x > 603.3 && x < 634 && y > 203.8 && y < 229.16 && !ChorroRebord){
+        ChorroRebord = true
+        counter(33)
+    }else if (x > 128.6 && x < 152.6 && y > 149.16 && y < 173.16 && !GallinaNavarro){
+        GallinaNavarro = true
+        counter(35)
     }  
     
-    if (counter==0){document.getElementById("play").classList.add ("win")} 
+    if (count === 0){document.getElementById("play").classList.add ("win")} 
 })
+}
+
+
+//LEVEL 2
+if (href.includes("level2")){
+    
+let count = 15
+
+let Elisa = false
+let RebordColibri = false
+let CristianPaz = false
+let Ñoquis = false
+let bondi = false
+let MarquibotsPena = false
+let BabyJeezus = false
+let MileiDyGaga = false
+let tucan = false
+let gatoServisky = false
+let FelipePigna = false
+let SylvestreNavarro = false
+let fantasma = false
+let BebeComunista = false
+let misterio = false
+
+document.getElementById ("img2").addEventListener("click",(e)=>{
+    let x = e.offsetX
+    let y = e.offsetY
+    
+    if (x > 720.6 && x < 751.3 && y > 426.5 && y < 509.16 && !Elisa){
+        Elisa = true
+        counter(1)
+    }else if (x > 35.3 && x < 79.3 && y > 46.5 && y < 85.16 && !RebordColibri){
+        RebordColibri = true
+        counter(3)
+    }else if (x > 271.3 && x < 298 && y > 394.5 && y < 461.16 && !CristianPaz){
+        CristianPaz = true
+        counter(5)
+    }else if (x > 455.3 && x < 484.6 && y > 241.16 && y < 261.16 && !Ñoquis){
+        Ñoquis = true
+        counter(7)
+    }else if (x > 0.6 && x < 115.3 && y > 181.16 && y < 238.5 && !bondi){
+        bondi = true
+        counter(9)
+    }else if (x > 43.3 && x < 79.3 && y > 319.8 && y < 363.8 && !MarquibotsPena){
+        MarquibotsPena = true
+        counter(11)
+    }else if (x > 160.6 && x < 179.3 && y > 225.16 && y < 253.16 && !BabyJeezus){
+        BabyJeezus = true
+        counter(13)
+    }else if (x > 127.3 && x < 160.6 && y > 417.16 && y < 485.16 && !MileiDyGaga){
+        MileiDyGaga = true
+        counter(15)
+    }else if (x > 919.3 && x < 986 && y > 470.5 && y < 513.16 && !tucan){
+        tucan = true
+        counter(17)
+    }else if (x > 616.6 && x < 684.6 && y > 633.16 && y < 679.8 && !gatoServisky){
+        gatoServisky = true
+        counter(19)
+    }else if (x > 650 && x < 678 && y > 329.16 && y < 358.5 && !FelipePigna){
+        FelipePigna = true
+        counter(21)
+    }else if (x > 475.3 && x < 526 && y > 507.8 && y < 577.16 && !SylvestreNavarro){
+        SylvestreNavarro = true
+        counter(23)
+    }else if (x > 274 && x < 320.6 && y > 47.8 && y < 101.16 && !fantasma){
+        fantasma = true
+        counter(25)
+    }else if (x > 956.6 && x < 982 && y > 377.16 && y < 414.5 && !BebeComunista){
+        BebeComunista = true
+        counter(27)
+    }else if (x > 832.6 && x < 974 && y > 551.8 && y < 627.8 && !misterio){
+        misterio = true
+        counter(29)
+    }
+    
+    if (count === 0){document.getElementById("play").classList.add ("win")} 
+})
+}
